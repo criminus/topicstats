@@ -41,6 +41,9 @@ class main_listener implements EventSubscriberInterface
     /** @var \phpbb\template\template */
     protected $template;
 
+    /** @var \phpbb\user */
+    protected $user;
+
     /* @var array topicstats_const */
     protected $topicstats_const;
 
@@ -55,12 +58,14 @@ class main_listener implements EventSubscriberInterface
         \phpbb\config\config $config,
         \phpbb\language\language $language,
         \phpbb\template\template $template,
+        \phpbb\user $user,
         array $topicstats_const,
         topicstats $topicstats,
     ) {
         $this->config    = $config;
         $this->language = $language;
         $this->template = $template;
+        $this->user = $user;
         $this->topicstats_const = $topicstats_const;
         $this->topicstats = $topicstats;
     }
@@ -105,7 +110,7 @@ class main_listener implements EventSubscriberInterface
         $this->template->assign_vars([
             'TS_TOTAL_REPLIES'    => $this->topicstats->formatNumber($topic_replies),
             'TOPIC_STARTED'     => $this->topicstats->convertTimeFromTimestamp($topic_create_time),
-            'LAST_REPLY'        => date('M y', $topic_last_reply),
+            'LAST_REPLY'        => $this->user->format_date($topic_last_reply, 'M y'),
             'TS_TOTAL_VIEWS'    => $this->topicstats->formatNumber($topic_views),
             'TOP_CONTRIBUTORS'  => $active_users,
             'POPULAR_DAYS'      => $popular_days,

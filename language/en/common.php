@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * Topic Statistics. An extension for the phpBB Forum Software package.
@@ -9,12 +8,14 @@
  *
  */
 
-if (!defined('IN_PHPBB')) {
-    exit;
+if (!defined('IN_PHPBB'))
+{
+	exit;
 }
 
-if (empty($lang) || !is_array($lang)) {
-    $lang = [];
+if (empty($lang) || !is_array($lang))
+{
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -34,7 +35,7 @@ if (empty($lang) || !is_array($lang)) {
 //
 
 $lang = array_merge($lang, [
-    'ACP_TOPICSTATS_SETTING_SAVED'    => 'Settings have been saved successfully!',
+	'ACP_TOPICSTATS_SETTING_SAVED'	=> 'Settings have been saved successfully!',
 
     'TS_REPLIES'                                => 'Replies',
     'TS_VIEWS'                                  => 'Views',
