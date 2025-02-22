@@ -1,0 +1,33 @@
+imports:
+    - { resource: topicstats_const.yml }
+
+services:
+    anix.topicstats.topicstats:
+        class: anix\topicstats\core\topicstats
+        arguments:
+            - '@dbal.conn'
+            - '@config'
+            - '@language'
+            - '@template'
+
+    anix.topicstats.controller.acp:
+        class: anix\topicstats\controller\acp_controller
+        arguments:
+            - '@config'
+            - '@language'
+            - '@log'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '%topicstats_const%'
+
+    anix.topicstats.listener:
+        class: anix\topicstats\event\main_listener
+        arguments:
+            - '@config'
+            - '@language'
+            - '@template'
+            - '%topicstats_const%'
+            - '@anix.topicstats.topicstats'
+        tags:
+            - { name: event.listener }

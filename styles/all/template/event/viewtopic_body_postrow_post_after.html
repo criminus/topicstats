@@ -1,0 +1,7 @@
+{% if TOPICSTATS_ENABLED and TOPICSTATS_LOCATION == 0 and postrow.S_FIRST_POST %}
+    {% INCLUDE '@anix_topicstats/topicstats_body.html' %}
+{% endif %}
+
+{% if TOPICSTATS_ENABLED and TOPICSTATS_LOCATION == 2 and postrow.TS_LAST_POST %}
+    {% INCLUDE '@anix_topicstats/topicstats_body.html' %}
+{% endif %}

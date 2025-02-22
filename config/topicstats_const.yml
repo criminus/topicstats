@@ -1,0 +1,6 @@
+parameters:
+  topicstats_const:
+    after_first_post: 0
+    before_first_post: 1
+    after_last_post: 2
+    before_last_post: 3

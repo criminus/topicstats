@@ -1,0 +1,55 @@
+<div id="topic_stats" class="topic_stats_main isFlex">
+    <div class="topic_stats_left isFlex">
+        <div class="topic_stats_ul isFlex">
+            <div class="topic_stat_item isFlex">
+                <span class="topic_stat_title">{{ lang('TS_REPLIES') }}</span>
+                <span class="topic_stat_value">{{ TS_TOTAL_REPLIES }}</span>
+            </div>
+            <div class="topic_stat_item isFlex">
+                <span class="topic_stat_title">{{ lang('TS_VIEWS') }}</span>
+                <span class="topic_stat_value">{{ TS_TOTAL_VIEWS }}</span>
+            </div>
+            <div class="topic_stat_item isFlex">
+                <span class="topic_stat_title">{{ lang('TS_CREATED') }}</span>
+                <span class="topic_stat_value">{{ TOPIC_STARTED }}</span>
+            </div>
+            <div class="topic_stat_item isFlex">
+                <span class="topic_stat_title">{{ lang('TS_LR') }}</span>
+                <span class="topic_stat_value">{{ LAST_REPLY }}</span>
+            </div>
+        </div>
+        <a href="#" class="topic_stats_toggle isFlex isResponsive"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+    </div>
+    <div class="topic_stats_middle isFlex">
+        <div class="popular_contributors">
+            <h4 class="topic_stats_header">{{ lang('TS_TP') }}</h4>
+            <div class="topic_stats_ulist isFlex">
+                {% for top_contributor in TOP_CONTRIBUTORS %}
+                <div id="u{{ loop.index }}" class="stats_user">
+                    <img src="{{ top_contributor.USER_AVATAR }}" alt="Avatar" />
+                    <p class="topic_stats_ublock">
+                        <span class="topic_stats_user" style="color: #{{ top_contributor.USER_COLOR }};">{{ top_contributor.USERNAME }}</span>
+                        <span class="topic_stats_posts">{{ top_contributor.POST_COUNT }}<span class="topic_stats_posts_text">{{ lang('TS_POSTS') }}</span></span>
+                    </p>
+                </div>
+                {% else %}
+                    <p>{{ lang('TS_NO_TP') }}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="popular_days">
+            <h4 class="topic_stats_header">{{ lang('TS_PD') }}</h4>
+            <div class="topic_stats_dlist isFlex">
+                {% for popular_day in POPULAR_DAYS %}
+                <div id="d{{ loop.index }}" class="stats_days">
+                    <span class="stats_day">{{ popular_day.POST_DAY|date('d M') }}<span class="stats_year">{{ popular_day.POST_DAY|date('Y') }}</span></span>
+                    <span class="topic_stats_posts">{{ popular_day.POST_COUNT }}<span class="topic_stats_posts_text">{{ lang('TS_POSTS') }}</span></span>
+                </div>
+                {% else %}
+                    <p>{{ lang('TS_NO_PD') }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <a href="#" class="topic_stats_toggle isFlex"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+</div>

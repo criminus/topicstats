@@ -1,0 +1,44 @@
+{% include 'overall_header.html' %}
+
+<h1>{{ lang('ACP_TOPICSTATS_TITLE') }}</h1>
+
+{% if S_ERROR %}
+	<div class="errorbox">
+		<h3>{{ lang('WARNING') }}</h3>
+		<p>{{ ERROR_MSG }}</p>
+	</div>
+{% endif %}
+
+<form id="anix_topicstats_acp" name="anix_topicstats_acp" method="post" action="{{ U_ACTION }}">
+
+	<fieldset>
+		<legend>{{ lang('SETTINGS') }}</legend>
+		<dl>
+			<dt><label for="topicstats_active">{{ lang('ACP_TOPICSTATS_ACTIVE') ~ lang('COLON') }}</label></dt>
+			<dd><label><input type="radio" class="radio" name="topicstats_active" value="1"{% if TOPICSTATS_ACTIVE %} checked="checked"{% endif %} /> {{ lang('YES') }}</label>
+				<label><input type="radio" class="radio" name="topicstats_active" value="0"{% if not TOPICSTATS_ACTIVE %} checked="checked"{% endif %} /> {{ lang('NO') }}</label></dd>
+		</dl>
+		<dl>
+			<dt><label>{{ lang('ACP_TOPICSTATS_LOCATION') ~ lang('COLON') }}</label><br>
+				<span>{{ lang('ACP_TOPICSTATS_LOCATION_EXPLAIN') }}</span></dt>
+			<dd><select name="topicstats_location">{{ LOCATION }}</select></dd>
+		</dl>
+		<dl>
+			<dt><label>{{ lang('ACP_TOPICSTATS_HM_USERS') }}</label><br />{{ lang('ACP_TOPICSTATS_HM_USERS_EXPLAIN') }}</dt>
+			<dd><input type="number" name="topicstats_hm_users" size="10" min="2" max="20" value="{{ HM_USERS }}" /></dd>
+		</dl>
+		<dl>
+			<dt><label>{{ lang('ACP_TOPICSTATS_HM_DAYS') }}</label><br />{{ lang('ACP_TOPICSTATS_HM_DAYS_EXPLAIN') }}</dt>
+			<dd><input type="number" name="topicstats_hm_days" size="10" min="2" max="20" value="{{ HM_DAYS }}" /></dd>
+		</dl>
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}" />&nbsp;
+		<input class="button2" type="submit" id="preview" name="preview" value="{{ lang('PREVIEW') }}" />
+		{{ S_FORM_TOKEN }}
+	</fieldset>
+
+</form>
+
+{% include 'overall_footer.html' %}
