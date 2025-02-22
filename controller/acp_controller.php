@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * Topic Statistics. An extension for the phpBB Forum Software package.
@@ -33,8 +34,8 @@ class acp_controller
 	/** @var \phpbb\user */
 	protected $user;
 
-    /* @var array topicstats_const */
-    protected $topicstats_const;
+	/* @var array topicstats_const */
+	protected $topicstats_const;
 
 	/** @var string Custom form action */
 	protected $u_action;
@@ -50,22 +51,21 @@ class acp_controller
 	 * @param \phpbb\user				$user		User object
 	 */
 	public function __construct(
-        \phpbb\config\config $config,
-        \phpbb\language\language $language,
-        \phpbb\log\log $log,
-        \phpbb\request\request $request,
-        \phpbb\template\template $template,
-        \phpbb\user $user,
-        array $topicstats_const
-    )
-	{
+		\phpbb\config\config $config,
+		\phpbb\language\language $language,
+		\phpbb\log\log $log,
+		\phpbb\request\request $request,
+		\phpbb\template\template $template,
+		\phpbb\user $user,
+		array $topicstats_const
+	) {
 		$this->config	= $config;
 		$this->language	= $language;
 		$this->log		= $log;
 		$this->request	= $request;
 		$this->template	= $template;
 		$this->user		= $user;
-        $this->topicstats_const = $topicstats_const;
+		$this->topicstats_const = $topicstats_const;
 	}
 
 	/**
@@ -85,17 +85,14 @@ class acp_controller
 		$errors = [];
 
 		// Is the form being submitted to us?
-		if ($this->request->is_set_post('submit'))
-		{
+		if ($this->request->is_set_post('submit')) {
 			// Test if the submitted form is valid
-			if (!check_form_key('anix_topicstats_acp'))
-			{
+			if (!check_form_key('anix_topicstats_acp')) {
 				$errors[] = $this->language->lang('FORM_INVALID');
 			}
 
 			// If no errors, process the form data
-			if (empty($errors))
-			{
+			if (empty($errors)) {
 				// Set the options the user configured
 				$this->set_configs();
 
@@ -115,34 +112,34 @@ class acp_controller
 			'S_ERROR'		=> $s_errors,
 			'ERROR_MSG'		=> $s_errors ? implode('<br />', $errors) : '',
 
-            'TOPICSTATS_ACTIVE'	=> (bool) $this->config['topicstats_active'],
-            'LOCATION'			=> $this->location($this->config['topicstats_location']),
-            'HM_USERS'			=> isset($this->config['topicstats_hm_users']) ? $this->config['topicstats_hm_users'] : 0,
-            'HM_DAYS'			=> isset($this->config['topicstats_hm_days']) ? $this->config['topicstats_hm_days'] : 0,
+			'TOPICSTATS_ACTIVE'	=> (bool) $this->config['topicstats_active'],
+			'LOCATION'			=> $this->location($this->config['topicstats_location']),
+			'HM_USERS'			=> isset($this->config['topicstats_hm_users']) ? $this->config['topicstats_hm_users'] : 0,
+			'HM_DAYS'			=> isset($this->config['topicstats_hm_days']) ? $this->config['topicstats_hm_days'] : 0,
 
 			'U_ACTION'		=> $this->u_action,
 		]);
 	}
 
-    protected function set_configs() {
-        $this->config->set('topicstats_active', $this->request->variable('topicstats_active', 0));
-        $this->config->set('topicstats_location', $this->request->variable('topicstats_location', 0));
-        $this->config->set('topicstats_hm_users', $this->request->variable('topicstats_hm_users', 0));
-        $this->config->set('topicstats_hm_days', $this->request->variable('topicstats_hm_days', 0));
-    }
+	protected function set_configs()
+	{
+		$this->config->set('topicstats_active', $this->request->variable('topicstats_active', 0));
+		$this->config->set('topicstats_location', $this->request->variable('topicstats_location', 0));
+		$this->config->set('topicstats_hm_users', $this->request->variable('topicstats_hm_users', 0));
+		$this->config->set('topicstats_hm_days', $this->request->variable('topicstats_hm_days', 0));
+	}
 
-    public function location($location = 0)
-    {
-        $location_text = [$this->topicstats_const['after_first_post'] => $this->language->lang('AFTER_FIRST_POST'), $this->topicstats_const['before_first_post'] => $this->language->lang('BEFORE_FIRST_POST'), $this->topicstats_const['after_last_post'] => $this->language->lang('AFTER_LAST_POST'), $this->topicstats_const['before_last_post'] => $this->language->lang('BEFORE_LAST_POST')];
-        $location_options = '';
-        foreach ($location_text as $value => $text)
-        {
-            $selected = ($value == $location) ? ' selected="selected"' : '';
-            $location_options .= "<option value='{$value}'$selected>$text</option>";
-        }
+	public function location($location = 0)
+	{
+		$location_text = [$this->topicstats_const['after_first_post'] => $this->language->lang('AFTER_FIRST_POST'), $this->topicstats_const['before_first_post'] => $this->language->lang('BEFORE_FIRST_POST'), $this->topicstats_const['after_last_post'] => $this->language->lang('AFTER_LAST_POST'), $this->topicstats_const['before_last_post'] => $this->language->lang('BEFORE_LAST_POST')];
+		$location_options = '';
+		foreach ($location_text as $value => $text) {
+			$selected = ($value == $location) ? ' selected="selected"' : '';
+			$location_options .= "<option value='{$value}'$selected>$text</option>";
+		}
 
-        return $location_options;
-    }
+		return $location_options;
+	}
 
 	/**
 	 * Set custom form action.

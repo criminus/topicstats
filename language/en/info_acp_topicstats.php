@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  * Topic Statistics. An extension for the phpBB Forum Software package.
@@ -8,14 +9,12 @@
  *
  */
 
-if (!defined('IN_PHPBB'))
-{
-	exit;
+if (!defined('IN_PHPBB')) {
+    exit;
 }
 
-if (empty($lang) || !is_array($lang))
-{
-	$lang = [];
+if (empty($lang) || !is_array($lang)) {
+    $lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -35,8 +34,8 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, [
-	'ACP_TOPICSTATS_TITLE'	            => 'Topic Statistics',
-	'ACP_TOPICSTATS'			        => 'Topic Statistics Settings',
+    'ACP_TOPICSTATS_TITLE'                => 'Topic Statistics',
+    'ACP_TOPICSTATS'                    => 'Topic Statistics Settings',
 
     'ACP_TOPICSTATS_ACTIVE'             => 'Enable Topic Statistics',
 
@@ -53,5 +52,5 @@ $lang = array_merge($lang, [
     'ACP_TOPICSTATS_HM_DAYS'            => 'Popular days count',
     'ACP_TOPICSTATS_HM_DAYS_EXPLAIN'    => 'Set how many popular days are displayed. Minimum value is 2 and maximum value is 20.',
 
-	'LOG_ACP_TOPICSTATS_SETTINGS'		=> '<strong>Topic Statistics settings updated</strong>',
+    'LOG_ACP_TOPICSTATS_SETTINGS'        => '<strong>Topic Statistics settings updated</strong>',
 ]);

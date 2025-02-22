@@ -31,15 +31,15 @@ class topicstats
         \phpbb\config\config $config,
         \phpbb\language\language $language,
         \phpbb\template\template $template
-    )
-    {
+    ) {
         $this->db = $db;
-        $this->config	= $config;
+        $this->config    = $config;
         $this->language = $language;
         $this->template = $template;
     }
 
-    public function get_total_approved_posts($topic_id) {
+    public function get_total_approved_posts($topic_id)
+    {
         $cache_time = 300; // 5 minutes cache
 
         $sql = 'SELECT topic_posts_approved 
@@ -53,7 +53,8 @@ class topicstats
         return $total_posts;
     }
 
-    public function get_topic_views($topic_id) {
+    public function get_topic_views($topic_id)
+    {
         $cache_time = 300; // 5 minutes cache
 
         $sql = 'SELECT topic_views 
@@ -67,7 +68,8 @@ class topicstats
         return $topic_views;
     }
 
-    public function get_active_users_in_topic($topic_id) {
+    public function get_active_users_in_topic($topic_id)
+    {
         $cache_time = 300; // 5 minutes cache
 
         $sql = 'SELECT u.user_id, u.username, u.user_colour, u.user_avatar, u.user_avatar_width, u.user_avatar_height, u.user_avatar_type, COUNT(p.post_id) AS post_count
@@ -88,7 +90,7 @@ class topicstats
                 'USER_ID'    => $row['user_id'],
                 'USERNAME'   => $row['username'],
                 'USER_COLOR' => $row['user_colour'],
-                'USER_AVATAR'=> $this->generate_avatar_url($row),
+                'USER_AVATAR' => $this->generate_avatar_url($row),
                 'POST_COUNT' => $row['post_count']
             ];
         }
@@ -98,7 +100,8 @@ class topicstats
         return $users;
     }
 
-    public function get_popular_days_in_topic($topic_id) {
+    public function get_popular_days_in_topic($topic_id)
+    {
         $cache_time = 300; // 5 minutes cache
 
         $sql = 'SELECT DATE(FROM_UNIXTIME(p.post_time)) AS post_day, COUNT(p.post_id) AS post_count
@@ -125,7 +128,8 @@ class topicstats
         return $popular_days;
     }
 
-    private function generate_avatar_url($user) {
+    private function generate_avatar_url($user)
+    {
         if (!empty($user['user_avatar'])) {
             switch ($user['user_avatar_type']) {
                 case 'avatar.driver.upload':
@@ -141,7 +145,8 @@ class topicstats
         return 'ext/anix/topicstats/styles/all/theme/images/no_avatar.gif';
     }
 
-    public function formatNumber($num) {
+    public function formatNumber($num)
+    {
         $suffixes = ['K' => 1e3, 'M' => 1e6, 'B' => 1e9, 'T' => 1e12];
 
         foreach ($suffixes as $suffix => $value) {
@@ -152,7 +157,8 @@ class topicstats
         return $num;
     }
 
-    public function convertTimeFromTimestamp($timestamp) {
+    public function convertTimeFromTimestamp($timestamp)
+    {
         $now = time();
 
         $seconds = $now - $timestamp;
@@ -181,5 +187,4 @@ class topicstats
 
         return $seconds . ' ' . $this->language->lang('TIME_UNIT_SECONDS');
     }
-
 }
