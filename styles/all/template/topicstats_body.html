@@ -15,7 +15,7 @@
             </div>
             <div class="topic_stat_item isFlex">
                 <span class="topic_stat_title">{{ lang('TS_LR') }}</span>
-                <span class="topic_stat_value">{{ LAST_REPLY }}</span>
+                <span class="topic_stat_value">{% if TS_TOTAL_REPLIES == 0 %} - {% else %}{{ LAST_REPLY }}{% endif %}</span>
             </div>
         </div>
         <a href="#" class="topic_stats_toggle isFlex isResponsive"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
