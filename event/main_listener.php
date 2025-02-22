@@ -88,10 +88,16 @@ class main_listener implements EventSubscriberInterface
         $row = $event['row'];
         $topic_create_time = $event['topic_data']['topic_time'];
         $topic_last_reply = $event['topic_data']['topic_last_post_time'];
-        $topic_views = $this->topicstats->get_topic_views($topic_id);
-        $topic_replies = ($this->topicstats->get_total_approved_posts($topic_id)) - 1;
-        $active_users = $this->topicstats->get_active_users_in_topic($topic_id);
-        $popular_days = $this->topicstats->get_popular_days_in_topic($topic_id);
+
+        if (!empty($this->topicstats) && !empty($this->config['topicstats_active'])) {
+            $topic_views = $this->topicstats->get_topic_views($topic_id);
+            $topic_replies = $this->topicstats->get_total_approved_posts($topic_id) - 1;
+            $active_users = $this->topicstats->get_active_users_in_topic($topic_id);
+            $popular_days = $this->topicstats->get_popular_days_in_topic($topic_id);
+        } else {
+            // Don't query anything if the extension is not enabled.
+            $topic_views = $topic_replies = $active_users = $popular_days = null;
+        }
 
         $last_post = ($topic_data['topic_last_post_id'] == $row['post_id']) ? true : false;
         $post_row['TS_LAST_POST'] = $last_post;
