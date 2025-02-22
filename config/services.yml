@@ -5,8 +5,10 @@ services:
     anix.topicstats.topicstats:
         class: anix\topicstats\core\topicstats
         arguments:
+            - '@cache'
             - '@dbal.conn'
             - '@config'
+            - '@user'
             - '@language'
             - '@template'
 

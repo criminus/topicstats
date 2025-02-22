@@ -42,7 +42,7 @@
             <div class="topic_stats_dlist isFlex">
                 {% for popular_day in POPULAR_DAYS %}
                 <div id="d{{ loop.index }}" class="stats_days">
-                    <span class="stats_day">{{ popular_day.POST_DAY|date('d M') }}<span class="stats_year">{{ popular_day.POST_DAY|date('Y') }}</span></span>
+                    <span class="stats_day">{{ popular_day.POST_MD }}<span class="stats_year">{{ popular_day.POST_YEAR }}</span></span>
                     <span class="topic_stats_posts">{{ popular_day.POST_COUNT }}<span class="topic_stats_posts_text">{{ lang('TS_POSTS') }}</span></span>
                 </div>
                 {% else %}
